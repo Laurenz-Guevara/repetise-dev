@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import NavBar from '../components/segments/NavBar';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -33,22 +32,36 @@ export default function Signup() {
 
   return (
     <div>
-      <section>
-      <form onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
-        {error && <h1>An error creating account</h1>}
-        <label htmlFor="email"><b>Email</b></label>
-        <input type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+      <section className="login-container">
+        <div className="form block">
+        <form onSubmit={handleSubmit}>
+          <h2 className="form-title">Sign Up</h2>
+          {error && <h1>An error creating account</h1>}
 
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordRef} placeholder="Enter Password" name="psw" required></input>
-        
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordConfirmRef} placeholder="Enter Password again" name="psw" required></input>
-        <button disabled={loading} type="submit">Sign Up</button>
-      </form>
-      <div className="already-signed-up">
-        <h2>Already have an account? <Link to="/login">Login</Link></h2>
+          <div className="form-wrapper">
+              <div className="form-container">
+                <label htmlFor="email"><b>Email:</b></label>
+                <input className="input-form" type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="psw"><b>Password:</b></label>
+                <input className="input-form" type="password" ref={passwordRef} placeholder="Enter Password" name="psw" required></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="psw"><b>Password</b></label>
+                <input className="input-form" type="password" ref={passwordConfirmRef} placeholder="Enter Password again" name="psw" required></input>
+              </div>
+              <div className="form-secondary">
+                <button className="button" disabled={loading} type="submit">Sign Up</button>
+                <div className="forgot-pass">
+                  <Link to="/forgot-password" className="login-link-text-password">Forgot Password?</Link>
+                </div>
+                <div className="already-signed-up">
+                  <h2>Already have an account? <Link to="/login" className="login-link-text">Login</Link></h2>
+                </div>
+              </div>
+            </div>         
+        </form>
       </div>
     </section>
     </div>

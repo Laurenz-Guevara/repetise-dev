@@ -34,14 +34,14 @@ h2 {
 .form-container {
   width: 350px;
   margin-bottom: 20px;
-  padding-left: 20px;
+  padding-left: 10px;
   text-align: right;
   float: left;
   border-bottom: 2px;
 }
 
 .input-form {
-  width: 230px;
+  width: 235px;
   border: none;
   border-bottom: 1px solid $backgroundblack;
 }
@@ -73,4 +73,39 @@ h2 {
   width: 135px;
   height: 40px;
   font-size: 20px;
+}
+
+@media (max-height: $tiny-screen) {
+  .form {
+    margin-top: 50px;
+  }
+
+  .login-container {
+    background: none;
+  }
+}
+
+@media (max-width: $small-screen) {
+  .form {
+    width: 80vw;
+    background-color: $white;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 0px;
+    
+  }
+
+  .form-container label {
+    float: left;
+    padding-bottom: 10px;
+  }
+
+  .input-form {
+    float: right;
+    width: 99%;
+  }
 }

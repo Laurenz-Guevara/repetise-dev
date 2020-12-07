@@ -26,23 +26,28 @@ export default function ForgotPassword() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <h2>Reset Password</h2>
-        {error && <h1>{error}</h1>}
-        {message && <h1>{message}</h1>}
-        <label htmlFor="email"><b>Email</b></label>
-        <input type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+    <div>
+      <section className="login-container">
+        <div className="form block">
+          <form onSubmit={handleSubmit} >
+            <h2 className="form-title">Reset Password</h2>
+            {error && <h1>An error resetting password</h1>}
+            <div className="form-wrapper">
+              <div className="form-container">
+                <label htmlFor="email"><b>Email:</b></label>
+                <input className="input-form" type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+              </div>
+              <div className="form-secondary">
+                <button className="button button-lg" disabled={loading} type="submit">Reset Password</button>
+                <div className="already-signed-up">
+                  <h2>Already have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> 
+      </section>
+    </div>
 
-        
-        <button disabled={loading} type="submit">Reset Password</button>
-      </form>
-      <div>
-        <Link to="/login">Login</Link>
-      </div>
-      <div className="already-signed-up">
-        <h2>Already have an account? <Link to="/signup">Sign Up</Link></h2>
-      </div>
-    </section>
   )
 }

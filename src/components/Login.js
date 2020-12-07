@@ -1,8 +1,7 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import NavBar from '../components/segments/NavBar';
-import '../styles/login.scss';
+import '../styles/login-form.scss';
 
 export default function Login() {
   const emailRef = useRef()
