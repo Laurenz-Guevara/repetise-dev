@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import '../styles/login-form.scss';
 
 export default function Login() {
   const emailRef = useRef()
@@ -50,7 +49,7 @@ export default function Login() {
                 <Link to="/forgot-password" className="login-link-text-password">Forgot Password?</Link>
               </div>
               <div className="already-signed-up">
-                <h2>Already have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
+                <h2>Don't have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
               </div>
             </div>
           </form>

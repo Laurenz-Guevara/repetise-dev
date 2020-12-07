@@ -41,23 +41,36 @@ export default function UpdateProfile() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <h2>Update Profile</h2>
-        {error && <h1>{error}</h1>}
-        <label htmlFor="email"><b>Email</b></label>
-        <input type="text" ref={emailRef} placeholder="Enter Email" name="email" required defaultValue={currentUser.email}></input>
+    <div>
+      <section className="login-container">
+        <div className="form block">
+          <form onSubmit={handleSubmit}>
+            <h2 className="form-title">Update Profile</h2>
+            {error && <h1>{error}</h1>}
+            <div className="form-wrapper">
+              <div className="form-container">
+                <label htmlFor="email"><b>Email</b></label>
+                <input className="input-form" type="text" ref={emailRef} placeholder="Enter Email" name="email" required defaultValue={currentUser.email}></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="psw"><b>Password</b></label>
+                <input className="input-form" type="password" ref={passwordRef} name="psw" placeholder="Leave blank to keep the same"></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="psw"><b>Password</b></label>
+                <input className="input-form" type="password" ref={passwordConfirmRef} name="psw"  placeholder="Leave blank to keep the same"></input>
+              </div>
+              <div className="form-secondary">
 
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordRef} name="psw" placeholder="Leave blank to keep the same"></input>
-        
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordConfirmRef} name="psw"  placeholder="Leave blank to keep the same"></input>
-        <button disabled={loading} type="submit">Sign Up</button>
-      </form>
-      <div className="already-signed-up">
-        <h2>Already have an account? <Link to="/login">Login</Link></h2>
-      </div>
-    </section>
+                <button className="button" disabled={loading} type="submit">Update</button>
+                <div className="already-signed-up">
+                  <h2>Don't want to update? <Link to="/" className="login-link-text">Return</Link></h2>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
   )
 }
