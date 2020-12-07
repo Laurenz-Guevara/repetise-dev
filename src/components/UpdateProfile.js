@@ -52,7 +52,7 @@ export default function UpdateProfile() {
         <input type="password" ref={passwordRef} name="psw" placeholder="Leave blank to keep the same"></input>
         
         <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordConfirmRef} placeholder="Enter Password again" name="psw"  placeholder="Leave blank to keep the same"></input>
+        <input type="password" ref={passwordConfirmRef} name="psw"  placeholder="Leave blank to keep the same"></input>
         <button disabled={loading} type="submit">Sign Up</button>
       </form>
       <div className="already-signed-up">

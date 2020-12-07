@@ -1,0 +1,180 @@
+@import '../global.scss';
+
+.logo {
+  padding-top: 20px;
+}
+
+.logo a{
+  color: $white;
+  text-decoration: none;
+}
+
+.logo a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $white;
+  transition: width 0.3s;
+}
+
+.logo a:hover::after {
+  width: 85%;
+  transition: width 0.3s;
+}
+
+.nav-wrap {
+  background-color: $teal;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  min-width: 10vh;
+  margin: auto 15%;
+  align-items: center;
+  background-color: $teal;
+  color: $white;
+}
+
+.nav-links {
+  padding-top: 20px;
+  margin: 0;
+  z-index: 2;
+}
+
+nav .logo {
+  font-size: 65px;
+  font-weight: 500;
+}
+
+nav .nav-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links li {
+  padding-right: 20px;
+}
+
+nav .nav-links a {
+  font-size: 35px;
+  font-weight: normal;
+  color: $white;
+  cursor: pointer;
+}
+
+@media (min-width: $medium-screen) {
+  .nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: $white;
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover::after {
+    width: 80%;
+    transition: width 0.3s;
+  }
+}
+
+nav .burger {
+  font-size: 65px;
+  display: none;
+  cursor: pointer;
+}
+
+@media (max-width: $large-screen) {
+  nav .logo {
+    font-size: 55px;
+    font-weight: 500;
+  }
+
+  .nav-links {
+    padding-top: 25px;
+    margin: 0;
+  }
+
+  nav .nav-links a {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: $medium-screen) {
+  li {
+    text-align: left;
+  }
+
+  nav {
+    margin: auto 15%;
+  }
+
+  nav .burger {
+    display: block;
+  }
+
+  .burger {
+    padding-top: 15px;
+    font-size: 45px !important;
+  }
+
+  nav .nav-links {
+    position: absolute;
+    display: block;
+    left: 0;
+    height: 100vh;
+    background: $darkteal;
+    width: 40%;
+    transform: translateX(-500px);
+    transition: 0.3s ease-in-out;
+  }
+
+  .nav-links {
+    top: 0;
+    margin: 0;
+    }
+
+  nav .nav-links li {
+    padding: 10px 0;
+    border-bottom: 1px solid $white;
+    width: 80%;
+  }
+
+  nav .nav-links li:last-of-type {
+    border-bottom: 0px solid $white;
+  }
+
+  nav .navlinks a:hover {
+    border-bottom: 0px solid $white;
+  }
+}
+
+@media (max-width: $tiny-screen) {
+  nav .logo {
+    font-size: 45px;
+    font-weight: 500;
+  }
+
+  .nav-links {
+    padding-top: 15px;
+    margin: 0;
+  }
+
+  nav .nav-links a {
+    font-size: 15px;
+  }
+
+  nav {
+    margin: auto 10%;
+  }
+}

@@ -1,0 +1,111 @@
+@import '../global.scss';
+
+h2 {
+  margin: 0;
+}
+
+.login-container {
+  height: 100vh;
+  background: rgb(129,241,245);
+  background: linear-gradient(90deg, rgba(129,241,245,1) 0%, rgba(129,211,245,1) 46%, rgba(0,212,255,1) 100%);
+}
+
+.form {
+  padding: 30px;
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: $white;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-title {
+  margin-bottom: 20px;
+}
+
+.form b {
+  padding-right: 20px;
+}
+
+.form-container {
+  width: 350px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  text-align: right;
+  float: left;
+  border-bottom: 2px;
+}
+
+.input-form {
+  width: 235px;
+  border: none;
+  border-bottom: 1px solid $backgroundblack;
+}
+
+.already-signed-up {
+  margin-top: 10px;
+}
+
+.login-link-text{
+  text-decoration: none;
+  color: $teal;
+  
+}
+
+.login-link-text-password {
+  text-decoration: none;
+  color: $backgroundblack;
+}
+
+.forgot-pass {
+  padding-top: 10px;
+}
+
+.form-secondary {
+  margin-top: 30px;
+}
+
+.form button {
+  width: 135px;
+  height: 40px;
+  font-size: 20px;
+}
+
+@media (max-height: $tiny-screen) {
+  .form {
+    margin-top: 50px;
+  }
+
+  .login-container {
+    background: none;
+  }
+}
+
+@media (max-width: $small-screen) {
+  .form {
+    width: 80vw;
+    background-color: $white;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 0px;
+    
+  }
+
+  .form-container label {
+    float: left;
+    padding-bottom: 10px;
+  }
+
+  .input-form {
+    float: right;
+    width: 99%;
+  }
+}
