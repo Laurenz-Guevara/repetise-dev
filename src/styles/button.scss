@@ -1,0 +1,24 @@
+.button {
+  width: 220px;
+  height: 70px;
+  font-size: 25px;
+  color: $backgroundblack;
+  background-color: $teal;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px $blackrgba;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button h3 {
+  margin: 0;
+}
+
+.button:hover {
+  background-color: $teal;
+  box-shadow: 0px 15px 20px $tealrgba;
+  color: $white;
+  transform: translateY(-7px);
+}

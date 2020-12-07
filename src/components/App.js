@@ -6,7 +6,8 @@ import Dashboard from './Dashboard'
 import Login from './Login'
 import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './ForgotPassword'
-import UpdateProfile from './UpdateProfile';
+import UpdateProfile from './UpdateProfile'
+import Welcome from './Welcome'
 
 function App() {
   return (
@@ -15,9 +16,11 @@ function App() {
         <Switch>
           <PrivateRoute exact path='/' component={Dashboard} />
           <PrivateRoute exact path='/update-profile' component={UpdateProfile} />
+          <Route path="/welcome-to-repitise" component={Welcome} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
+          
 
         </Switch>
       </AuthProvider>

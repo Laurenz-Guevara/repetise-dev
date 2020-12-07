@@ -1,0 +1,17 @@
+@import '../global.scss';
+
+.wrapper {
+  margin: auto 20%;
+}
+
+@media (max-width: $large-view) {
+  .wrapper {
+    margin: auto 15%;
+  }
+}
+
+@media (max-width: $tiny-screen) {
+  .wrapper {
+    margin: auto 10%;
+  }
+}
