@@ -41,7 +41,6 @@ export function AuthProvider({ children }) {
       setCurrentUser(user)
       setLoading(false)
     })
-
     return unsubscribe
   }, [])
 
