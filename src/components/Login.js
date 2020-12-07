@@ -2,11 +2,10 @@ import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
-export default function Signup() {
+export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -14,17 +13,14 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
-    }
-
     try {
-      setError("")
+      setError('')
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current.value, passwordRef.current.value)
       history.push("/")
+      console.log('Something')
     } catch {
-      setError("Failed to create an account")
+      setError('Failed to login')
     }
 
     setLoading(false)
@@ -33,20 +29,20 @@ export default function Signup() {
   return (
     <section>
       <form onSubmit={handleSubmit}>
-        <h2>Sign Up</h2>
-        {error && <h1>An error creating account</h1>}
+        <h2>Login</h2>
+        {error && <h1>An error logging in</h1>}
         <label htmlFor="email"><b>Email</b></label>
         <input type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
 
         <label htmlFor="psw"><b>Password</b></label>
         <input type="password" ref={passwordRef} placeholder="Enter Password" name="psw" required></input>
-        
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordConfirmRef} placeholder="Enter Password again" name="psw" required></input>
-        <button disabled={loading} type="submit">Sign Up</button>
+        <button disabled={loading} type="submit">Login</button>
       </form>
+      <div>
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </div>
       <div className="already-signed-up">
-        <h2>Already have an account? <Link to="/login">Login</Link></h2>
+        <h2>Already have an account? <Link to="/signup">Sign Up</Link></h2>
       </div>
     </section>
   )
