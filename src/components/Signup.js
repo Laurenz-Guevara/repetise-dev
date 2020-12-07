@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import NavBar from '../components/segments/NavBar';
 
 export default function Signup() {
   const emailRef = useRef()
@@ -31,7 +32,8 @@ export default function Signup() {
   }
 
   return (
-    <section>
+    <div>
+      <section>
       <form onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         {error && <h1>An error creating account</h1>}
@@ -49,5 +51,6 @@ export default function Signup() {
         <h2>Already have an account? <Link to="/login">Login</Link></h2>
       </div>
     </section>
+    </div>
   )
 }

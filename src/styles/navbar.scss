@@ -4,6 +4,25 @@
   padding-top: 20px;
 }
 
+.logo a{
+  color: $white;
+  text-decoration: none;
+}
+
+.logo a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: $white;
+  transition: width 0.3s;
+}
+
+.logo a:hover::after {
+  width: 85%;
+  transition: width 0.3s;
+}
+
 .nav-wrap {
   background-color: $teal;
 }
@@ -53,8 +72,20 @@ nav .nav-links a {
   cursor: pointer;
 }
 
-nav .nav-links a:hover {
-  border-bottom: 1px solid $white;
+@media (min-width: $medium-screen) {
+  .nav-links a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: $white;
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover::after {
+    width: 80%;
+    transition: width 0.3s;
+  }
 }
 
 nav .burger {

@@ -1,6 +1,8 @@
 import React, {useRef, useState} from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import NavBar from '../components/segments/NavBar';
+import '../styles/login.scss';
 
 export default function Login() {
   const emailRef = useRef()
@@ -27,23 +29,35 @@ export default function Login() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        {error && <h1>An error logging in</h1>}
-        <label htmlFor="email"><b>Email</b></label>
-        <input type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
-
-        <label htmlFor="psw"><b>Password</b></label>
-        <input type="password" ref={passwordRef} placeholder="Enter Password" name="psw" required></input>
-        <button disabled={loading} type="submit">Login</button>
-      </form>
-      <div>
-        <Link to="/forgot-password">Forgot Password?</Link>
-      </div>
-      <div className="already-signed-up">
-        <h2>Already have an account? <Link to="/signup">Sign Up</Link></h2>
-      </div>
-    </section>
+    <div>
+      <section className="login-container">
+        <div className="form block">
+          <form onSubmit={handleSubmit} >
+            <h2 className="form-title">Login</h2>
+            {error && <h1>An error logging in</h1>}
+            <div className="form-wrapper">
+              <div className="form-container">
+                <label htmlFor="email"><b>Email:</b></label>
+                <input className="input-form" type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="psw"><b>Password:</b></label>
+                <input className="input-form" type="password" ref={passwordRef} placeholder="Enter Password" name="psw" required></input>
+              </div>
+            </div>
+            <div className="form-secondary">
+              <button className="button" disabled={loading} type="submit">Login</button>
+              <div className="forgot-pass">
+                <Link to="/forgot-password" className="login-link-text-password">Forgot Password?</Link>
+              </div>
+              <div className="already-signed-up">
+                <h2>Already have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
+              </div>
+            </div>
+          </form>
+        </div> 
+      </section>        
+    </div>
+    
   )
 }
