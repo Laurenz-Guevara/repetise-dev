@@ -38,3 +38,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 ### `firebase deploy`
 
 Firebase is setup with this project the firebase project name is "Repitise"
+
+### Notes
+Not Firebase init as a single html, select multiple if so...

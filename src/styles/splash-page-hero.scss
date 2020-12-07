@@ -1,7 +1,7 @@
 @import '../global.scss';
 
 .hero-container {
-  height: calc(100vh - 109px);
+  height: calc(100vh - 111px);
   width: 100%;
   position: relative;
   background-color: $teal;
@@ -88,7 +88,7 @@
 
 @media (max-width: $large-screen) {
   .hero-container {
-    height: calc(100vh - 95px);
+    height: calc(100vh - 97px);
   }
 
   .flex-container h1{
@@ -112,7 +112,7 @@
 
 @media (max-width: $medium-screen) {
   .hero-container {
-    height: calc(100vh - 95px);
+    height: calc(100vh - 97px);
   }
 
   .repitise-image {
@@ -155,7 +155,7 @@
 
 @media (max-width: $small-screen) {
   .hero-container {
-    height: calc(100vh - 81px);
+    height: calc(100vh - 97px);
   }
 }
 

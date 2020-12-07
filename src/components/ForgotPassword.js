@@ -40,7 +40,7 @@ export default function ForgotPassword() {
               <div className="form-secondary">
                 <button className="button button-lg" disabled={loading} type="submit">Reset Password</button>
                 <div className="already-signed-up">
-                  <h2>Already have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
+                  <h2>Access your account and <Link to="/login" className="login-link-text">Login</Link></h2>
                 </div>
               </div>
             </div>
