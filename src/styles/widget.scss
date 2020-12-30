@@ -1,0 +1,57 @@
+@import '../global.scss';
+
+.widget-container {
+  display: inline-block;
+  background-color: $white;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 120px;
+  width: 960px;
+  min-width: 830px;
+  text-align: left;
+}
+
+.widget-container h1,
+.widget-container h2 {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.deck-content {
+  display: inline-block;
+  text-align: left;
+  margin: 0 15px;
+}
+
+.deck-img-container {
+  display: inline-block;
+  max-width: 200px;
+  max-height: 200px;
+  height: 100%;
+  vertical-align: top;
+  position: relative;
+  margin-right: 16px;
+
+}
+
+.deck-img-container img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.level-bar::after {
+  content: '';
+  background: $grey;
+  display: block;
+  min-width: 580px;
+  height: 15px;
+}
+
+.profile-component {
+  display: block;
+}
+
+.deck-misc-info {
+  text-align: right;
+}
