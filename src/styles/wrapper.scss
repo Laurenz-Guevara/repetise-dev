@@ -1,17 +1,34 @@
 @import '../global.scss';
 
-.wrapper {
+.splash-wrapper {
   margin: auto 20%;
 }
 
 @media (max-width: $large-view) {
-  .wrapper {
+  .splash-wrapper {
     margin: auto 15%;
   }
 }
 
 @media (max-width: $tiny-screen) {
-  .wrapper {
+  .splash-wrapper {
     margin: auto 10%;
   }
+}
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 60px;
+  max-width: 1080px;
+  height: 100vh;
+  background: $grey;
+  background-clip: content-box;
+}
+
+.inner-wrapper {
+  padding: 20px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }

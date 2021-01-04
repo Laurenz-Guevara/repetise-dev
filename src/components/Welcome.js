@@ -10,7 +10,7 @@ export default function Welcome() {
     <div>
       <NavBar />
       <section className="hero-container skewed-header">
-        <div className="splash-text wrapper">
+        <div className="splash-text splash-wrapper">
           <div className="flex-container">
             <h1>A place for all your language flashcards.</h1>
             <h3>Create, store and share your favourite flashcard decks.</h3>
