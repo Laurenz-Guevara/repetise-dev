@@ -1,11 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import firebase from "../firebase"
 
 export default function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const { history } = useHistory()
+
+  const [users, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const ref = firebase.firestore().collection("users")
+ 
+  function getData() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setData(items);
+      setLoading(false);
+    })
+  }
+
+  useEffect(() => {
+    getData();
+  }, [])
 
   async function handleLogout(){
     setError('')
@@ -16,6 +37,10 @@ export default function Dashboard() {
     } catch {
       setError('Fail to log out')
     }
+  }
+
+  if (loading) {
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -62,6 +87,17 @@ export default function Dashboard() {
               </div>
               
             </div>   
+          </div>
+
+          <div className="deck-block widget-container">
+            <h1>Users</h1>
+            {users.map((user) => (
+              <div key={user.id}>
+                <h2>User - Title</h2>
+                <p>{user.firstname}</p>
+                <p>{user.secondname}</p>
+              </div>
+            ))}
           </div>
 
           <div className="profile-component widget-container">
