@@ -11,16 +11,14 @@ export default function Dashboard() {
   const [userData, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const ref = firebase.firestore().collection("users") //Depricated
-  const usersData = firebase.firestore().collection("userData")
+  // const usersData = firebase.firestore().collection("userData").doc(currentUser.uid)
+  //const usersData = firebase.firestore().collection("userData").doc("2nIfH1rPkZW6XliFHQPY5spp7Gr2")
 
   function getData() {
     setLoading(true);
-    usersData.onSnapshot((querySnapshot) => {
+    firebase.firestore().collection("userData").doc(currentUser.uid).onSnapshot((doc) => {
       const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
+      items.push(doc.data());
       setData(items);
       setLoading(false);
     })
@@ -57,7 +55,7 @@ export default function Dashboard() {
       </div>
       <div className="wrapper">
         <div className="inner-wrapper">
-
+          
           <div className="deck-block widget-container">
             {userData.map((user) => (
               <div key = {user.userName}>
@@ -101,10 +99,8 @@ export default function Dashboard() {
           </div>
 
           <div className="profile-component widget-container">
-            <h2>Profile</h2>
+            <h2>Profile Options</h2>
             {error && <h1>An error logging out</h1>}
-            <h3>Email: </h3> { currentUser.email}
-            <h3>Data: </h3> { currentUser.uid}
             <Link to="/update-profile"> Update Profile</Link>
             <div>
               <button onClick={handleLogout} type="submit">Logout</button>
