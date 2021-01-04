@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 export default function Signup() {
   const emailRef = useRef()
+  const userRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
@@ -21,7 +22,7 @@ export default function Signup() {
     try {
       setError("")
       setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
+      await signup(emailRef.current.value, userRef.current.value, passwordRef.current.value)
       history.push("/")
     } catch {
       setError("Failed to create an account")
@@ -42,6 +43,10 @@ export default function Signup() {
               <div className="form-container">
                 <label htmlFor="email"><b>Email:</b></label>
                 <input className="input-form" type="text" ref={emailRef} placeholder="Enter Email" name="email" required></input>
+              </div>
+              <div className="form-container">
+                <label htmlFor="username"><b>Username:</b></label>
+                <input className="input-form" type="text" ref={userRef} placeholder="Enter username" name="username" required></input>
               </div>
               <div className="form-container">
                 <label htmlFor="psw"><b>Password:</b></label>

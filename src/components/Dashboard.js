@@ -8,13 +8,15 @@ export default function Dashboard() {
   const { currentUser, logout } = useAuth()
   const { history } = useHistory()
 
-  const [users, setData] = useState([]);
+  const [userData, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const ref = firebase.firestore().collection("users")
- 
+
+  const ref = firebase.firestore().collection("users") //Depricated
+  const usersData = firebase.firestore().collection("userData")
+
   function getData() {
     setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
+    usersData.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
@@ -57,6 +59,15 @@ export default function Dashboard() {
         <div className="inner-wrapper">
 
           <div className="deck-block widget-container">
+            {userData.map((user) => (
+              <div key = {user.userName}>
+                <h1>{user.userName}</h1>
+                <h1>{user.userEmail}</h1>
+              </div>
+            ))}
+          </div>
+
+          <div className="deck-block widget-container">
             <div className="deck-img-container">
               <img src={"https://bit.ly/34V0aks"} alt="Repitise picture of app"></img>
             </div>
@@ -89,21 +100,11 @@ export default function Dashboard() {
             </div>   
           </div>
 
-          <div className="deck-block widget-container">
-            <h1>Users</h1>
-            {users.map((user) => (
-              <div key={user.id}>
-                <h2>User - Title</h2>
-                <p>{user.firstname}</p>
-                <p>{user.secondname}</p>
-              </div>
-            ))}
-          </div>
-
           <div className="profile-component widget-container">
             <h2>Profile</h2>
             {error && <h1>An error logging out</h1>}
             <h3>Email: </h3> { currentUser.email}
+            <h3>Data: </h3> { currentUser.uid}
             <Link to="/update-profile"> Update Profile</Link>
             <div>
               <button onClick={handleLogout} type="submit">Logout</button>
