@@ -1,4 +1,5 @@
 # Repitise Project by Laurenz Guevara 2020
+Node 14.18.0
 
 In the project directory, you can run:
 
