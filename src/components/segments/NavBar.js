@@ -8,7 +8,7 @@ function NavBar(){
   return(
     <div className="nav-wrap">
       <nav>
-        <div className="logo" ><Link to="/">Repitise</Link></div>
+        <div className="logo" ><Link to="/">Repetise</Link></div>
         <ul className="nav-links" style={{transform: open ? "translateX(0px)" : ""}}>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/contact-us">Contact Us</Link></li>
