@@ -7,10 +7,10 @@ export default function Dashboard() {
     <div>
       <div className="desktop-header">
         <div className="header-bar">
-          <Link to="/" className="logo"><h1>Repitise</h1></Link>
-          <Link to="/" className="logo"><h1>Repitise</h1></Link>
-          <Link to="/" className="logo"><h1>Repitise</h1></Link>
-          <Link to="/" className="logo"><h1>Repitise</h1></Link>
+          <Link to="/" className="logo"><h1>Repetise</h1></Link>
+          <Link to="/" className="logo"><h1>Repetise</h1></Link>
+          <Link to="/" className="logo"><h1>Repetise</h1></Link>
+          <Link to="/" className="logo"><h1>Repetise</h1></Link>
         </div>
       </div>
       {/* <h2>Profile</h2>

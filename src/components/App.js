@@ -22,7 +22,7 @@ function App() {
           <PrivateRoute exact path='/' component={Dashboard} />
           <PrivateRoute exact path='/update-profile' component={UpdateProfile} />
           <PrivateRoute exact path='/stats' component={Stats} />
-          <Route path="/welcome-to-repitise" component={Welcome} />
+          <Route path="/welcome-to-repetise" component={Welcome} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />

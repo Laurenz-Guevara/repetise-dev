@@ -47,7 +47,7 @@ export default function Dashboard() {
     <div>
       <div className="header-container">
         <div className="header-bar">
-          <Link to="/" className="header-element"><h1>Repitise</h1></Link>
+          <Link to="/" className="header-element"><h1>Repetise</h1></Link>
           <Link to="/" className="header-element"><h1>Home</h1></Link>
           <Link to="/stats" className="header-element"><h1>Stats</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
@@ -67,7 +67,7 @@ export default function Dashboard() {
 
           <div className="deck-block widget-container">
             <div className="deck-img-container">
-              <img src={"https://bit.ly/34V0aks"} alt="Repitise picture of app"></img>
+              <img src={"https://bit.ly/34V0aks"} alt="Repetise picture of app"></img>
             </div>
             <div className="deck-content">
               <h1 className="deck-title">HSK1 Chinese</h1>
@@ -83,7 +83,7 @@ export default function Dashboard() {
 
           <div className="deck-block widget-container">
             <div className="deck-img-container">
-              <img src={"https://bit.ly/3o1qscj"} alt="Repitise picture of app"></img>
+              <img src={"https://bit.ly/3o1qscj"} alt="Repetise picture of app"></img>
             </div>
             <div className="deck-content">
               <h1 className="deck-title">Top 100 Korean Words</h1>
