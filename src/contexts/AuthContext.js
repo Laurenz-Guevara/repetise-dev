@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
   function signup(email, username, password) {
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
       return firebase.firestore().collection("userData").doc(cred.user.uid).set({
+        enrolledCourses: [],
         userName: username,
         userEmail: email,
         userPremium: false,

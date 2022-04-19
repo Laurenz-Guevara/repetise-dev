@@ -40,6 +40,48 @@
   border-radius: 10px;
 }
 
+.enroll {
+  position: relative;
+  float: right;
+  background: none;
+  border: none;
+}
+
+.enroll-button {
+  text-align: right;
+  padding: 0 25px;
+  font-size: 18px !important;
+}
+
+.enroll::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 15px;
+  height: 3px;
+  border-radius: 1px;
+  background: #4ED4F8;
+}
+
+.enroll::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 0;
+  width: 15px;
+  height: 3px;
+  border-radius: 1px;
+  background: #4ED4F8;
+  transition: .3s;
+  transform: rotate(90deg);
+}
+
+.enrolled::after {
+  transition: .3s;
+  transform: rotate(180deg) !important;
+}
+
 .level-bar::after {
   content: '';
   background: $grey;
@@ -54,4 +96,15 @@
 
 .deck-misc-info {
   text-align: right;
+}
+
+.courses-panel h1 {
+  text-align: center;
+  font-size: 30px;
+}
+
+.courses-panel p {
+  text-align: center;
+  font-size: 20px;
+  padding: 0 40px;
 }
