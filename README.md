@@ -1,4 +1,4 @@
-# Repitise Project by Laurenz Guevara 2020
+# Repitise Project by Laurenz Guevara 2022
 Node 14.18.0
 
 In the project directory, you can run:

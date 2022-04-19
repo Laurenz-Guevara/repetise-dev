@@ -7,12 +7,12 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const { history } = useHistory()
-
   const [userData, setData] = useState([]);
+  const [course, setCourse] = useState([])
   const [loading, setLoading] = useState(false);
-
-  // const usersData = firebase.firestore().collection("userData").doc(currentUser.uid)
-  //const usersData = firebase.firestore().collection("userData").doc("2nIfH1rPkZW6XliFHQPY5spp7Gr2")
+  const cn = "HSK2 Chinese Course" //need to make this an array
+  const ref = firebase.firestore().collection("courses").where("courseName", "in", [cn]);
+  //potentially in the courses have a place that stores names of people within it and then "in enrolledStudents"
 
   function getData() {
     setLoading(true);
@@ -20,12 +20,27 @@ export default function Dashboard() {
       const items = [];
       items.push(doc.data());
       setData(items);
+      console.log("get Data items", items)
+      setLoading(false);
+    })
+  }
+
+  function getCourse() {
+    setLoading(true);
+    ref.onSnapshot((querySnapshot) => {
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      })
+      console.log("Items", items)
+      setCourse(items);
       setLoading(false);
     })
   }
 
   useEffect(() => {
     getData();
+    getCourse();
   }, [])
 
   async function handleLogout(){
@@ -55,49 +70,16 @@ export default function Dashboard() {
       </div>
       <div className="wrapper">
         <div className="inner-wrapper">
-          
           <div className="deck-block widget-container">
             {userData.map((user) => (
               <div key = {user.userName}>
                 <h1>{user.userName}</h1>
                 <h1>{user.userEmail}</h1>
+                <h1>Courses - {user.enrolledCourses + ""}</h1>
               </div>
             ))}
           </div>
-
-          <div className="deck-block widget-container">
-            <div className="deck-img-container">
-              <img src={"https://bit.ly/34V0aks"} alt="Repetise picture of app"></img>
-            </div>
-            <div className="deck-content">
-              <h1 className="deck-title">HSK1 Chinese</h1>
-              <h2 className="deck-desc">A deck with 150 words found in HSK1</h2>
-              <h2 className="deck-progress">120/150 words learned</h2>
-              <div className="level-bar"></div>
-              <div className="deck-misc-info">
-                <h2 className="deck-author">Created by Laurenz Guevara</h2>
-                <h2 className="deck-created-date">Date Created - 04/11/2020</h2>
-              </div>
-            </div>   
-          </div>
-
-          <div className="deck-block widget-container">
-            <div className="deck-img-container">
-              <img src={"https://bit.ly/3o1qscj"} alt="Repetise picture of app"></img>
-            </div>
-            <div className="deck-content">
-              <h1 className="deck-title">Top 100 Korean Words</h1>
-              <h2 className="deck-desc">The top 100 used Korean words</h2>
-              <h2 className="deck-progress">43/100 words learned</h2>
-              <div className="level-bar"></div>
-              <div className="deck-misc-info">
-                <h2 className="deck-author">Created by Laurenz Guevara</h2>
-                <h2 className="deck-created-date">Date Created - 08/10/2020</h2>
-              </div>
-              
-            </div>   
-          </div>
-
+ 
           <div className="profile-component widget-container">
             <h2>Profile Options</h2>
             {error && <h1>An error logging out</h1>}
@@ -111,3 +93,20 @@ export default function Dashboard() {
     </div>
   )
 }
+
+
+{/* <div className="deck-block widget-container">
+            <div className="deck-img-container">
+              <img src={"https://bit.ly/3o1qscj"} alt="Repetise picture of app"></img>
+            </div>
+            <div className="deck-content">
+              <h1 className="deck-title">Top 100 Korean Words</h1>
+              <h2 className="deck-desc">The top 100 used Korean words</h2>
+              <h2 className="deck-progress">43/100 words learned</h2>
+              <div className="level-bar"></div>
+              <div className="deck-misc-info">
+                <h2 className="deck-author">Created by Laurenz Guevara</h2>
+                <h2 className="deck-created-date">Date Created - 08/10/2020</h2>
+              </div>
+            </div>   
+          </div> */}

@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 import Stats from './Stats'
+import Courses from './Courses'
 import Welcome from './Welcome'
 import ContactUs from './ContactUs'
 import '../styles/login-form.scss';
@@ -22,6 +23,7 @@ function App() {
           <PrivateRoute exact path='/' component={Dashboard} />
           <PrivateRoute exact path='/update-profile' component={UpdateProfile} />
           <PrivateRoute exact path='/stats' component={Stats} />
+          <PrivateRoute exact path='/courses' component={Courses} />
           <Route path="/welcome-to-repetise" component={Welcome} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
