@@ -7,32 +7,39 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const { history } = useHistory()
-  const [userData, setData] = useState([]);
-  const [course, setCourse] = useState([])
+  //const [userData, setData] = useState([]);
+  let userData = [];
+  const [userInfoData, setUserInfoData] = useState([]);
+  const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(false);
-  const cn = "HSK2 Chinese Course" //need to make this an array
-  const ref = firebase.firestore().collection("courses").where("courseName", "in", [cn]);
-  //potentially in the courses have a place that stores names of people within it and then "in enrolledStudents"
+  let enrolledCourse = [""]
+  let ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
 
   function getData() {
     setLoading(true);
     firebase.firestore().collection("userData").doc(currentUser.uid).onSnapshot((doc) => {
       const items = [];
       items.push(doc.data());
-      setData(items);
-      console.log("get Data items", items)
+      userData = items
+      setUserInfoData(items)
+      getCourse(items)
       setLoading(false);
+  
     })
   }
 
-  function getCourse() {
+  function getCourse(items) {
+    console.log("Data", items)
     setLoading(true);
+    userData.map((course) => {
+      enrolledCourse = (course.enrolledCourses)
+    })
+    ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
     ref.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       })
-      console.log("Items", items)
       setCourse(items);
       setLoading(false);
     })
@@ -40,12 +47,10 @@ export default function Dashboard() {
 
   useEffect(() => {
     getData();
-    getCourse();
   }, [])
 
   async function handleLogout(){
     setError('')
-
     try {
       await logout()
       history.push('./login')
@@ -71,15 +76,30 @@ export default function Dashboard() {
       <div className="wrapper">
         <div className="inner-wrapper">
           <div className="deck-block widget-container">
-            {userData.map((user) => (
+            {console.log(userInfoData)}
+            {
+            userInfoData.map((user) => (
               <div key = {user.userName}>
                 <h1>{user.userName}</h1>
                 <h1>{user.userEmail}</h1>
-                <h1>Courses - {user.enrolledCourses + ""}</h1>
               </div>
             ))}
           </div>
- 
+          
+          {course.map((course) => (
+          <div key = {course.courseName} className="deck-block widget-container ">
+            <div className="deck-img-container">
+                <img src={course.imageUrl} alt="Repetise picture of app"></img>
+            </div>
+            <div className="deck-content">
+                <h1 className="deck-title">{course.courseName}</h1>
+                <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
+                <h2 className="deck-author">Created by {course.courseAuthor}</h2>
+                <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
+            </div>
+          </div>
+          ))}
+
           <div className="profile-component widget-container">
             <h2>Profile Options</h2>
             {error && <h1>An error logging out</h1>}

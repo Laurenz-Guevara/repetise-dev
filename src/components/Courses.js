@@ -39,7 +39,7 @@ export default function Dashboard() {
       enrolledCourses = (course.enrolledCourses)
     })
     for (const courseTitle of courseTitles) {
-      for (let i = 0; i < enrollCourse.length; i++){
+      for (let i = 0; i <= enrollCourse.length; i++){
         if (courseTitle.innerHTML == enrolledCourses[i]) {
           courseTitle.parentElement.parentElement.childNodes[2].classList.add("enrolled")
         }
@@ -70,11 +70,12 @@ export default function Dashboard() {
     })
   }
 
-  updateCourse()
   useEffect(() => {
     getData()
     getCourse()
-  }, [])
+}, []);
+
+updateCourse()
 
   if (loading) {
     return <h1>Loading...</h1>;
