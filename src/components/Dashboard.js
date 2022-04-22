@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import firebase from "../firebase"
+import { useLayoutEffect, useRef } from 'react/cjs/react.production.min'
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -13,7 +14,7 @@ export default function Dashboard() {
   const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(false);
   let enrolledCourse = [""]
-  let ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
+  let ref = []
 
   function getData() {
     setLoading(true);
@@ -34,15 +35,21 @@ export default function Dashboard() {
     userData.map((course) => {
       enrolledCourse = (course.enrolledCourses)
     })
-    ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+    try {
+      ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
+      ref.onSnapshot((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        })
+        setCourse(items);
+        setLoading(false);
       })
-      setCourse(items);
-      setLoading(false);
-    })
+    } catch {} //Change P tag to say "Please enroll in a course"
+  }
+
+  function startCourse(course) {
+    localStorage.setItem('course', JSON.stringify(course))
   }
 
   useEffect(() => {
@@ -97,13 +104,16 @@ export default function Dashboard() {
                 <h2 className="deck-author">Created by {course.courseAuthor}</h2>
                 <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
             </div>
+            <div onClick={() => startCourse(course.courseName)} id={course.courseName}>
+            <Link to="/flashcards" className="header-element"><h2 className="enroll-button" >Start Course</h2></Link>
+            </div>
           </div>
           ))}
 
           <div className="profile-component widget-container">
             <h2>Profile Options</h2>
             {error && <h1>An error logging out</h1>}
-            <Link to="/update-profile"> Update Profile</Link>
+            <Link to="/update-profile">Update Profile</Link>
             <div>
               <button onClick={handleLogout} type="submit">Logout</button>
             </div>
@@ -113,20 +123,3 @@ export default function Dashboard() {
     </div>
   )
 }
-
-
-{/* <div className="deck-block widget-container">
-            <div className="deck-img-container">
-              <img src={"https://bit.ly/3o1qscj"} alt="Repetise picture of app"></img>
-            </div>
-            <div className="deck-content">
-              <h1 className="deck-title">Top 100 Korean Words</h1>
-              <h2 className="deck-desc">The top 100 used Korean words</h2>
-              <h2 className="deck-progress">43/100 words learned</h2>
-              <div className="level-bar"></div>
-              <div className="deck-misc-info">
-                <h2 className="deck-author">Created by Laurenz Guevara</h2>
-                <h2 className="deck-created-date">Date Created - 08/10/2020</h2>
-              </div>
-            </div>   
-          </div> */}

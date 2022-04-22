@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import ForgotPassword from './ForgotPassword'
 import UpdateProfile from './UpdateProfile'
 import Stats from './Stats'
+import Flashcards from './Flashcards'
 import Courses from './Courses'
 import Welcome from './Welcome'
 import ContactUs from './ContactUs'
@@ -23,6 +24,7 @@ function App() {
           <PrivateRoute exact path='/' component={Dashboard} />
           <PrivateRoute exact path='/update-profile' component={UpdateProfile} />
           <PrivateRoute exact path='/stats' component={Stats} />
+          <PrivateRoute exact path='/flashcards' component={Flashcards} />
           <PrivateRoute exact path='/courses' component={Courses} />
           <Route path="/welcome-to-repetise" component={Welcome} />
           <Route path="/signup" component={Signup} />

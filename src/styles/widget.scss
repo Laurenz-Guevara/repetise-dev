@@ -8,7 +8,6 @@
   border-radius: 10px;
   min-height: 120px;
   width: 960px;
-  min-width: 830px;
   text-align: left;
 }
 
@@ -50,7 +49,7 @@
 .enroll-button {
   text-align: right;
   padding: 0 25px;
-  font-size: 18px !important;
+  color: $backgroundblack;
 }
 
 .enroll::before {
