@@ -4,10 +4,10 @@ import { Link, useHistory } from 'react-router-dom'
 import firebase from "../firebase"
 
 export default function Dashboard() {
-  const [course, setCourse] = useState([])
-  const { currentUser, logout } = useAuth()
-  const [userData, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  let [course, setCourse] = useState([])
+  let { currentUser, logout } = useAuth()
+  let [userData, setData] = useState([]);
+  let [loading, setLoading] = useState(false);
   const ref = firebase.firestore().collection("courses");
   let enrolledCourses = []
 
@@ -19,6 +19,7 @@ export default function Dashboard() {
       setData(items);
       setLoading(false);
     })
+    updateCourse()
   }
 
   function getCourse() {
@@ -34,13 +35,13 @@ export default function Dashboard() {
   }
 
   function updateCourse() {
-    const courseTitles = document.querySelectorAll('.deck-title');
+    let courseTitles = document.querySelectorAll('.deck-title');
     userData.map((course) => {
       enrolledCourses = (course.enrolledCourses)
     })
     for (const courseTitle of courseTitles) {
-      for (let i = 0; i < enrollCourse.length; i++){
-        if (courseTitle.innerHTML == enrolledCourses[i]) {
+      for (const course of enrolledCourses){
+        if (courseTitle.innerHTML == course) {
           courseTitle.parentElement.parentElement.childNodes[2].classList.add("enrolled")
         }
       }
@@ -48,19 +49,17 @@ export default function Dashboard() {
   }
 
   function enrollCourse(course, id) {
-    var element = document.getElementById(id); 
-    console.log("Enrolled Before", enrolledCourses)
-
+    let element = document.getElementById(id); 
     if (element.classList.contains("enrolled")) {
-      var index = enrolledCourses.indexOf(course)
-      enrolledCourses.splice(index, 1)
+      let newEnrolled = enrolledCourses.filter((item) => item !== id)
       element.classList.remove("enrolled")
-      updateEnrolledStatus()
+      enrolledCourses = newEnrolled
+      
     } else {
       element.classList.add("enrolled")
       enrolledCourses.push(course.courseName)
-      updateEnrolledStatus()
     }
+    updateEnrolledStatus(element.id)
   }
 
   function updateEnrolledStatus() {
@@ -70,11 +69,12 @@ export default function Dashboard() {
     })
   }
 
-  updateCourse()
   useEffect(() => {
     getData()
     getCourse()
-  }, [])
+}, []);
+
+  updateCourse()
 
   if (loading) {
     return <h1>Loading...</h1>;
@@ -91,28 +91,26 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="wrapper">
-        <div className="inner-wrapper">
-          <div className="deck-block widget-container courses-panel">
-          <h1>Courses</h1>
-          <p>Welcome to the courses page, here you can browse and add any language decks into your account. Feel free to select as many as you like!</p>
-          </div>
-          {course.map((course) => (
-          <div key = {course.courseName} className="deck-block widget-container ">
-            <div className="deck-img-container">
-                <img src={course.imageUrl} alt="Repetise picture of app"></img>
-            </div>
-            <div className="deck-content">
-                <h1 className="deck-title">{course.courseName}</h1>
-                <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
-                <h2 className="deck-author">Created by {course.courseAuthor}</h2>
-                <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
-            </div>
-            <div onClick={() => enrollCourse(course, course.courseName)} className="enroll" id={course.courseName}>
-              <h2 className="enroll-button" >Select Course</h2>
-            </div>
-          </div>
-          ))}
+        <div className="deck-block-intro widget-container courses-panel">
+        <h1>Courses</h1>
+        <p>Welcome to the courses page, here you can browse and add any language decks into your account. Feel free to select as many as you like!</p>
         </div>
+        {course.map((course) => (
+        <div key = {course.courseName} className="deck-content-block widget-container ">
+          <div className="deck-img-container">
+              <img src={course.imageUrl} alt="Repetise picture of app"></img>
+          </div>
+          <div className="deck-content">
+              <h1 className="deck-title">{course.courseName}</h1>
+              <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
+              <h2 className="deck-author">Created by {course.courseAuthor}</h2>
+              <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
+          </div>
+          <div onClick={() => enrollCourse(course, course.courseName)} className="enroll" id={course.courseName}>
+            <h2 className="enroll-button" >Select Course</h2>
+          </div>
+        </div>
+        ))}
       </div>
     </div>
   )
