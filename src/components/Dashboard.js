@@ -88,7 +88,7 @@ export default function Dashboard() {
                 <button className="update-profile-button"><Link to="/update-profile">Update Profile</Link></button>
                 <button onClick={handleLogout} type="submit">Logout</button>
               </div>
-              <p>If you would like to enroll into a new course or remove a current one please head to the courses page! If you have unenrolled from a course your data will not be saved and will require you to learn it again.</p>
+              <p>If you would like to enroll into a new course or remove a current one please head to the courses page! If you have removed a course your data will not be saved and will require you to learn it again.</p>
             </div>
           ))}
         </div>
