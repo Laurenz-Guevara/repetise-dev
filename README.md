@@ -1,44 +1,28 @@
-# Repitise Project by Laurenz Guevara 2022
+<div align="center">
+  <h2 align="center">Laurenz Guevara - P2418364</h2>
+  <p align="center">Repetise - The Language Flashcard App</p>
+</div>
+
+<contents>
+  <contenttitle>Table of Contents</contenttitle>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#node-version">Node Version</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</contents>
+
+### Summary
+Repetise is an online language learning application which is built with React, SaSS, Firebase and Webpack. This is the repo that houses the code shown on production at www.repetise.com. This is not a webapp for real use but for the Development Project Module and is built my P2418364, Laurenz Guevara.
+
+### Node Version
 Node 14.18.0
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-### `firebase deploy`
-
-Firebase is setup with this project the firebase project name is "repetise"
-
 ### Notes
-Not Firebase init as a single html, select multiple if so...
+Incase firebase needs to be re-added then during initalise do not Firebase init as a single html, select multiple.
+Firebase is setup with this project the firebase project name is "repetise"
+Ensure to "npm run build" before "firebase deploy"
+
+### Contact
+
+* laurenzguevara@outlook.com
