@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import firebase from "../firebase"
+
 import { useLayoutEffect, useRef } from 'react/cjs/react.production.min'
 
 export default function Dashboard() {
@@ -75,23 +76,24 @@ export default function Dashboard() {
         <div className="header-bar">
           <Link to="/" className="header-element"><h1>Repetise</h1></Link>
           <Link to="/" className="header-element"><h1>Home</h1></Link>
-          <Link to="/stats" className="header-element"><h1>Stats</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
         </div>
       </div>
       <div className="wrapper">
-        <div className="inner-wrapper">
-          <div className="deck-block widget-container">
-            {userInfoData.map((user) => (
-              <div key = {user.userName}>
-                <h1>{user.userName}</h1>
-                <h1>{user.userEmail}</h1>
+        <div className="deck-block-intro widget-container">
+          {userInfoData.map((user) => (
+            <div key = {user.userName} className = "intro-panel">
+              <h1 className="user-name">Welcome {user.userName}</h1>
+              <div class="misc-container">
+                <button className="update-profile-button"><Link to="/update-profile">Update Profile</Link></button>
+                <button onClick={handleLogout} type="submit">Logout</button>
               </div>
-            ))}
-          </div>
-          
+              <p>If you would like to enroll into a new course or remove a current one please head to the courses page! If you have unenrolled from a course your data will not be saved and will require you to learn it again.</p>
+            </div>
+          ))}
+        </div>
           {course.map((course) => (
-          <div key = {course.courseName} className="deck-block widget-container ">
+          <div key = {course.courseName} className="deck-content-block widget-container ">
             <div className="deck-img-container">
                 <img src={course.imageUrl} alt="Repetise picture of app"></img>
             </div>
@@ -101,21 +103,20 @@ export default function Dashboard() {
                 <h2 className="deck-author">Created by {course.courseAuthor}</h2>
                 <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
             </div>
-            <div onClick={() => startCourse(course.courseName)} id={course.courseName}>
-            <Link to="/flashcards" className="header-element"><h2 className="enroll-button" >Start Course</h2></Link>
+            <div onClick={() => startCourse(course.courseName)} className="deck-interactive" id={course.courseName}>
+            <Link to="/flashcards" className="header-element"><h2 className="start-course" >Start Course</h2></Link>
             </div>
           </div>
           ))}
 
-          <div className="profile-component widget-container">
+          {/* <div className="profile-component widget-container">
             <h2>Profile Options</h2>
             {error && <h1>An error logging out</h1>}
             <Link to="/update-profile">Update Profile</Link>
             <div>
               <button onClick={handleLogout} type="submit">Logout</button>
             </div>
-          </div>
-        </div>
+          </div> */}
       </div>
     </div>
   )

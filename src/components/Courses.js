@@ -91,28 +91,26 @@ export default function Dashboard() {
         </div>
       </div>
       <div className="wrapper">
-        <div className="inner-wrapper">
-          <div className="deck-block widget-container courses-panel">
-          <h1>Courses</h1>
-          <p>Welcome to the courses page, here you can browse and add any language decks into your account. Feel free to select as many as you like!</p>
-          </div>
-          {course.map((course) => (
-          <div key = {course.courseName} className="deck-block widget-container ">
-            <div className="deck-img-container">
-                <img src={course.imageUrl} alt="Repetise picture of app"></img>
-            </div>
-            <div className="deck-content">
-                <h1 className="deck-title">{course.courseName}</h1>
-                <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
-                <h2 className="deck-author">Created by {course.courseAuthor}</h2>
-                <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
-            </div>
-            <div onClick={() => enrollCourse(course, course.courseName)} className="enroll" id={course.courseName}>
-              <h2 className="enroll-button" >Select Course</h2>
-            </div>
-          </div>
-          ))}
+        <div className="deck-block-intro widget-container courses-panel">
+        <h1>Courses</h1>
+        <p>Welcome to the courses page, here you can browse and add any language decks into your account. Feel free to select as many as you like!</p>
         </div>
+        {course.map((course) => (
+        <div key = {course.courseName} className="deck-content-block widget-container ">
+          <div className="deck-img-container">
+              <img src={course.imageUrl} alt="Repetise picture of app"></img>
+          </div>
+          <div className="deck-content">
+              <h1 className="deck-title">{course.courseName}</h1>
+              <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
+              <h2 className="deck-author">Created by {course.courseAuthor}</h2>
+              <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
+          </div>
+          <div onClick={() => enrollCourse(course, course.courseName)} className="enroll" id={course.courseName}>
+            <h2 className="enroll-button" >Select Course</h2>
+          </div>
+        </div>
+        ))}
       </div>
     </div>
   )
