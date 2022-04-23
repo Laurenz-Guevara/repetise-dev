@@ -29,8 +29,7 @@ export default function Dashboard() {
     })
   }
 
-  function getCourse(items) {
-    console.log("Data", items)
+  function getCourse() {
     setLoading(true);
     userData.map((course) => {
       enrolledCourse = (course.enrolledCourses)
@@ -83,9 +82,7 @@ export default function Dashboard() {
       <div className="wrapper">
         <div className="inner-wrapper">
           <div className="deck-block widget-container">
-            {console.log(userInfoData)}
-            {
-            userInfoData.map((user) => (
+            {userInfoData.map((user) => (
               <div key = {user.userName}>
                 <h1>{user.userName}</h1>
                 <h1>{user.userEmail}</h1>

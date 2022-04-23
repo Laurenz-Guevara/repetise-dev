@@ -116,8 +116,6 @@ export default function Dashboard() {
     document.querySelector(".quiz-answer").classList.remove("display-quiz")
     
     if (questionCount < translatedWord.length) {
-      console.log(translatedWord, "Translated")
-      console.log(pronunciation, "Translated")
       questionCounter = document.querySelector('.question-count')
       questionCounter.innerText = `Card: ${questionCount + 1} out of ${translatedWord.length}`;
       targetWord.innerText = translatedWord[questionCount]
@@ -176,6 +174,11 @@ export default function Dashboard() {
   }
 
   function startButton() {
+    pronunciation = []
+    reviewDate = []
+    reviewStatus = []
+    translatedMeaning = []
+    translatedWord = []
     quizButtons = document.querySelectorAll('.quiz-button')
     secondaryButtons = document.querySelectorAll('.secondary-button')
     
@@ -235,7 +238,7 @@ export default function Dashboard() {
                         <p className="counters question-count">Question: 0</p>
                     </div>
                     <div className="quiz-word">
-                        <h1 className='target-word'>你好</h1>
+                        <h1 className='target-word'>Loading...</h1>
                     </div>
                     <div className="answers-wrapper">
                         <button onClick={() => buttonSelected('answer')} className="quiz-button" title="Show Answer">Show Answer</button>
@@ -253,10 +256,10 @@ export default function Dashboard() {
                         <p className="counters question-count question-count-behind">Question: 0</p>
                     </div>
                     <div className="quiz-word">
-                        <p className='pinyin'>nǐ hǎo</p>
-                        <h1 className='target-word target-back'>你好</h1>
+                        <p className='pinyin'>Loading...</p>
+                        <h1 className='target-word target-back'>Loading...</h1>
                         <div class="spacer"></div>
-                        <p className='translation'>Translation</p>
+                        <p className='translation'>Loading...</p>
                         
                     </div>
                     <div className="answers-wrapper">
