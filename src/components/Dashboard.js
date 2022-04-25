@@ -37,11 +37,13 @@ export default function Dashboard() {
 
   function getCourse() {
     
-    setLoading(true);
-    userData.map((course) => {
-      enrolledCourse = (course.enrolledCourses)
-    })
+    
     try {
+      setLoading(true);
+      userData.map((course) => {
+        enrolledCourse = (course.enrolledCourses)
+      })
+
       ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
       ref.onSnapshot((querySnapshot) => {
         const items = [];
