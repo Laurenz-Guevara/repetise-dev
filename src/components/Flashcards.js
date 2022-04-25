@@ -285,7 +285,7 @@ export default function Dashboard() {
                         <h1 className='target-word'>Loading...</h1>
                     </div>
                     <div className="answers-wrapper">
-                        <button onClick={() => buttonSelected('answer')} className="quiz-button" title="Show Answer">Show Answer</button>
+                        <button onClick={() => buttonSelected('answer')} className="quiz-button" title="Show Answer">Reveal</button>
                     </div>
                     <div className="secondary-buttons-wrapper">
                       <Link to="/"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
