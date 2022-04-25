@@ -45,7 +45,7 @@ export default function UpdateProfile() {
       <section className="login-container">
         <div className="form block">
           <form onSubmit={handleSubmit}>
-            <h2 className="form-title">Update Profile</h2>
+            <h2 className="form-title">Set New Password</h2>
             {error && <h1>{error}</h1>}
             <div className="form-wrapper">
               <div className="form-container">
@@ -61,7 +61,6 @@ export default function UpdateProfile() {
                 <input className="input-form" type="password" ref={passwordConfirmRef} name="psw"  placeholder="Leave blank to keep the same"></input>
               </div>
               <div className="form-secondary">
-
                 <button className="button" disabled={loading} type="submit">Update</button>
                 <div className="already-signed-up">
                   <h2>Don't want to update? <Link to="/" className="login-link-text">Return</Link></h2>

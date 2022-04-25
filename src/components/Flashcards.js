@@ -11,46 +11,32 @@ let reviewStatus = []
 let translatedMeaning = []
 let translatedWord = []
 let courseName = JSON.parse(localStorage.getItem('course'))
+let questionCount = 0
+let weight = 0
+let maxNewCards = 0
 
 export default function Dashboard() {
   
   let [loading, setLoading] = useState(false);
-  let [courseData, courseCard] = useState([])
   const [selected, selectedCourse] = useState([]);
-  let [cards, addCards] = useState([])
   let { currentUser, logout } = useAuth()
 
-  let [rcards, setReviewCards] = useState([])
   let [ncards, setNewCards] = useState([])
+  let [rcards, setReviewCards] = useState([])
 
-  let questionCount = 0;
   let quizButtons = ''
   let secondaryButtons = ''
+
   let questionCounter = document.querySelector('.question-count')
-  
   let quizTitle = document.querySelectorAll('.quiz-title h1')
   let targetWord = document.querySelector('.target-word')
 
-  
-  
-  let weight = 0
-  let lgth = 0
   let shuffled = []
 
   function getCourseCard() {
+    maxNewCards = 0
     let itemContentViewer = []
-
     courseName = JSON.parse(localStorage.getItem('course'))
-    let ref = firebase.firestore().collection("courses").where("courseName", "==", courseName)
-    setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      })
-      courseCard(items);
-      setLoading(false);
-    })
 
     let reviewCard = firebase.firestore().collection("userData").doc(currentUser.uid).collection("Progression").where("course", "==", courseName) // Pull in review cards
     reviewCard.onSnapshot((querySnapshot) => {
@@ -68,17 +54,12 @@ export default function Dashboard() {
     })
 
     let newCard = firebase.firestore().collection("courses").doc(courseName).collection("words").where("review-status", "==", "new") // Pull in new cards
-    let maxNewCards = 0
+    
     newCard.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
-          if (maxNewCards < 10) {
-            maxNewCards++
-            setNewCards(items)
-          } else {
-            console.log("No cards left")
-          }
+          setNewCards(items)
       })
     })
   }
@@ -95,8 +76,32 @@ export default function Dashboard() {
   };
 
   function generateCard(){
+    questionCount = 0
     shuffled = []
-    shuffled = ncards.filter(val => !rcards.includes(val));
+    let ids = []
+    let review = []
+
+    let currentDate = new Date();
+    currentDate = ("Date", currentDate.getDate() + '/' + currentDate.getMonth() + '/' + currentDate.getFullYear()) 
+
+    for (const x of rcards) {
+      ids.push(x.translatedMeaning)
+      review.push(x['review-date'])
+    }
+    
+    let ncardsUpdated = ncards.filter(function(result) {
+      return !ids?.includes(result.translatedMeaning)
+    });
+
+    let rCardsDateCheck = rcards.filter(function(result) {
+      if (result['review-date'] <= currentDate) {
+        return review?.includes(result['review-date'])
+      }
+    })
+
+    ncardsUpdated = ncardsUpdated.slice(0, 10)
+    
+    shuffled = (ncardsUpdated.concat(rCardsDateCheck))
     shuffled = shuffleArray(shuffled)
 
     shuffled.map((card) => {
@@ -105,9 +110,52 @@ export default function Dashboard() {
       pronunciation.push(card['pronunciation'])
       translatedMeaning.push(card['translatedMeaning'])
       translatedWord.push(card['translatedWord'])
+      weight.push(card['weight'])
     })
-    weight = 0;
     loadQuestion();
+  }
+  
+  async function setCard(buttonWeight) {
+    try {
+      let date = new Date();
+      let getDoc = await firebase.firestore().collection("userData").doc(currentUser.uid).collection("Progression").where("translatedWord", "==", translatedWord[questionCount]).get();
+
+      if (getDoc.empty) {
+        let oldCounter = questionCount
+        date = ("Date", date.getDate() + buttonWeight + '/' + date.getMonth() + '/' + date.getFullYear()) 
+        let reference = firebase.firestore().collection("userData").doc(currentUser.uid).collection("Progression")
+        return reference.add({
+          course: courseName,
+          pronunciation: pronunciation[oldCounter],
+          ["review-date"]: date,
+          ["review-status"]: "learning",
+          translatedMeaning: translatedMeaning[oldCounter],
+          translatedWord: translatedWord[oldCounter],
+          weight: (buttonWeight + weight[questionCount])
+        });
+      } 
+
+      if (buttonWeight == 0) { //if Again
+        date = ("Date", date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()) 
+        let reference = firebase.firestore().collection("userData").doc(currentUser.uid).collection("Progression").doc(getDoc.docs[0].id)
+        return reference.update({
+          ["review-date"]: date,
+          ["review-status"]: "learning",
+          weight: 0
+        });
+      }
+
+      else {
+        date = ("Date", date.getDate() + buttonWeight + '/' + date.getMonth() + '/' + date.getFullYear()) 
+        let reference = firebase.firestore().collection("userData").doc(currentUser.uid).collection("Progression").doc(getDoc.docs[0].id)
+        return reference.update({
+          ["review-date"]: date,
+          ["review-status"]: "learning",
+          weight: buttonWeight + weight[questionCount]
+        });
+      }
+    } catch {alert("Error Occured, please refresh page and try again.")} 
+    loadQuestion()  
   }
 
   function loadQuestion() {
@@ -119,35 +167,35 @@ export default function Dashboard() {
       questionCounter = document.querySelector('.question-count')
       questionCounter.innerText = `Card: ${questionCount + 1} out of ${translatedWord.length}`;
       targetWord.innerText = translatedWord[questionCount]
-      
-    } 
+    } else {
+      document.querySelector(".quiz-panel").classList.add("hide")
+      document.querySelector(".quiz-answer").classList.add("hide")
+      document.querySelector(".quiz-panel-behind").classList.remove("hide")
+    }
   }
 
-  function buttonSelected(button) {
-    let weight = 0
+  async function buttonSelected(button) {
     switch(button) {
       case 'btn-1':
-        console.log("Button 1")
+        await setCard(3)
         questionCount++
         loadQuestion()
         break;
       case 'btn-2':
-        console.log("Button 2")
+        await setCard(1)
         questionCount++
         loadQuestion()
         break;
       case 'btn-3':
-        console.log("Button 3")
+        await setCard(0)
         questionCount++
         loadQuestion()
         break;
       case 'btn-4':
-        console.log("Button 4")
         questionCount++
         loadQuestion()
         break;
       case 'answer':
-        //Make word same on back of card etc
 
         document.querySelector(".quiz-panel").classList.remove("display-quiz")
         document.querySelector(".quiz-answer").classList.remove("hide")
@@ -162,13 +210,13 @@ export default function Dashboard() {
 
         questionCounter = document.querySelector('.question-count-behind')
         questionCounter.innerText = `Card: ${questionCount + 1} out of ${translatedWord.length}`;
-
+      
         pinyin.innerText = pronunciation[questionCount]
         targetWordBack.innerText = translatedWord[questionCount]
         translation.innerText = translatedMeaning[questionCount]
         break;
       default:
-        console.log("None selected")
+        alert("None selected")
         break;
     }
   }
@@ -179,6 +227,7 @@ export default function Dashboard() {
     reviewStatus = []
     translatedMeaning = []
     translatedWord = []
+    weight = []
     quizButtons = document.querySelectorAll('.quiz-button')
     secondaryButtons = document.querySelectorAll('.secondary-button')
     
@@ -187,7 +236,7 @@ export default function Dashboard() {
 
     document.querySelector(".quiz-panel").classList.add("display-quiz")
     document.querySelector(".quiz-start-screen").classList.add("hide")
-    //document.querySelector(".quiz-answer").classList.add("hide")
+    document.querySelector(".quiz-panel-behind").classList.add("hide")
 
     if (localStorage && localStorage.getItem('course')) {
       selectedCourse(courseName)
@@ -197,10 +246,6 @@ export default function Dashboard() {
     else {
       selectedCourse('None Selected')
     }
-  }
-
-  function quitQuiz() {
-    console.log("Quiz Quit")
   }
 
   useEffect(() => {
@@ -217,7 +262,6 @@ export default function Dashboard() {
         <div className="header-bar">
           <Link to="/" className="header-element"><h1>Repetise</h1></Link>
           <Link to="/" className="header-element"><h1>Home</h1></Link>
-          <Link to="/stats" className="header-element"><h1>Stats</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
         </div>
       </div>
@@ -226,7 +270,7 @@ export default function Dashboard() {
                 <div className="quiz-start-screen">
                     <div className="content-box text-content">
                         <h1>Repetise Flashcards</h1>
-                        <p>Please look at the card and select the option that best suits your perception of the word. If you did not recall the card correctly please select "Again".</p>
+                        <p>Please look at the card and select the option that best suits your perception of the word. If you did not recall the card correctly please select "Again". 10 New cards will be added and any reviews that are due for today will appear too.</p>
                     </div>
                     <button onClick={() => startButton()} className="white-button" id="start" title="Start button">Start</button>
                 </div>
@@ -258,7 +302,7 @@ export default function Dashboard() {
                     <div className="quiz-word">
                         <p className='pinyin'>Loading...</p>
                         <h1 className='target-word target-back'>Loading...</h1>
-                        <div class="spacer"></div>
+                        <div className="spacer"></div>
                         <p className='translation'>Loading...</p>
                         
                     </div>
@@ -272,44 +316,15 @@ export default function Dashboard() {
                       <Link to="/"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
                     </div>
                 </div>
-
-                {/* <div className="quiz-panel-behind hide">
+                <div className="quiz-panel-behind hide">
                     <div className="content-box text-content">
                         <h1>You have finished!</h1>
-                        <p>You have completed the deck and your score is displayed below. If you are having trouble with words go to the Wordlist section and search for the incorrect ones.</p>
-                        <p className="counters score-count final-score">Correct: 0</p>
+                        <p>You have completed the deck {courseName} Click here to return to your dashboard.</p>
                     </div>
-                    <button className="white-button" id="restart">Restart</button>
-                </div> */}
+                    <button className="white-button"><Link to="/">Dashboard</Link></button>
+                </div>
             </div>
         </main>
     </div>
   )
 }
-
-  // function loadDeckIntoUser(elementId){
-  //   console.log("ELEMENT", elementId)
-
-  //     ref = firebase.firestore().collection("courses").where("courseName", "==", courseName)
-
-  //     firebase.firestore().collection("courses").doc("HSK1").onSnapshot((doc) => {
-  //       const items = [];
-  //       items.push(doc.data());
-  //       const loadReference = firebase.firestore().collection("courses").doc("HSK1")
-  //     })
-
-  //     const loadReference = firebase.firestore().collection("userData").doc(currentUser.uid)
-  //       return loadReference.set({
-  //         enrolledCourses: ['native'],
-  //         userName: username,
-  //         userEmail: email,
-  //         userPremium: false,
-  //         userScore: 0,
-  //       });
-  //     });
-
-  //     const reference = firebase.firestore().collection("userData").doc(currentUser.uid);
-  //   return reference.update({
-  //     enrolledCourses: enrolledCourses
-  //   })
-  // }

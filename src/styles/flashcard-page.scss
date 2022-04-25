@@ -120,14 +120,19 @@
   box-sizing: border-box;
 }
 
+.white-button a{
+  font-size: 26px;
+  color: $backgroundblack;
+}
+
 .top-spacing {
   padding-top: 35px;
 }
 
-.quiz-start-screen {
+.quiz-start-screen, .quiz-panel-behind {
   padding: 25vh 0;
   text-align: center;
-}
+} 
 
 .display-quiz {
   display: block;
@@ -158,11 +163,13 @@
 
 @media only screen and (min-width: 1000px) {
   .quiz-start-screen .text-content h1,
+  .quiz-panel-behind .text-content h1,
   .text-content h1 {
       font-size: 35px;
   }
 
   .quiz-start-screen .text-content p,
+  .quiz-panel-behind .text-content p,
   .text-content p {
       max-width: 700px;
       font-size: 25px;

@@ -19,8 +19,7 @@ export function AuthProvider({ children }) {
         enrolledCourses: [],
         userName: username,
         userEmail: email,
-        userPremium: false,
-        userScore: 0,
+        userAdmin: false
       });
     });
   }
