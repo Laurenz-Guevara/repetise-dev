@@ -86,8 +86,6 @@ export default function Dashboard() {
         <div className="header-bar">
           <Link to="/" className="header-element"><h1>Repetise</h1></Link>
           <Link to="/" className="header-element"><h1>Home</h1></Link>
-          <Link to="/stats" className="header-element"><h1>Stats</h1></Link>
-          <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
         </div>
       </div>
       <div className="wrapper">
@@ -102,7 +100,6 @@ export default function Dashboard() {
           </div>
           <div className="deck-content">
               <h1 className="deck-title">{course.courseName}</h1>
-              <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
               <h2 className="deck-author">Created by {course.courseAuthor}</h2>
               <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
           </div>

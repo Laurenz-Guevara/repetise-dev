@@ -9,10 +9,10 @@ export default function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
   const { history } = useHistory()
-  //const [userData, setData] = useState([]);
   let userData = [];
   const [userInfoData, setUserInfoData] = useState([]);
   const [course, setCourse] = useState([]);
+  const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
   let enrolledCourse = [""]
   let ref = []
@@ -26,11 +26,17 @@ export default function Dashboard() {
       setUserInfoData(items)
       getCourse(items)
       setLoading(false);
-  
+      items.map((user) => {
+        if (user.userAdmin == false) {
+          console.log("Admin")
+          document.querySelector('.admin-panel').classList.add('hide')
+        }
+      })
     })
   }
 
   function getCourse() {
+    
     setLoading(true);
     userData.map((course) => {
       enrolledCourse = (course.enrolledCourses)
@@ -45,7 +51,18 @@ export default function Dashboard() {
         setCourse(items);
         setLoading(false);
       })
-    } catch {} //Change P tag to say "Please enroll in a course"
+
+      ref = firebase.firestore().collection("courses").where("courseName", "in", enrolledCourse)
+      ref.onSnapshot((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        })
+        setCourse(items);
+        setLoading(false);
+      })
+
+    } catch {}
   }
 
   function startCourse(course) {
@@ -75,8 +92,8 @@ export default function Dashboard() {
       <div className="header-container">
         <div className="header-bar">
           <Link to="/" className="header-element"><h1>Repetise</h1></Link>
-          <Link to="/" className="header-element"><h1>Home</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
+          <Link to="/create" className="admin-panel"><h1>Admin</h1></Link>
         </div>
       </div>
       <div className="wrapper">
@@ -84,7 +101,7 @@ export default function Dashboard() {
           {userInfoData.map((user) => (
             <div key = {user.userName} className = "intro-panel">
               <h1 className="user-name">Welcome {user.userName}</h1>
-              <div class="misc-container">
+              <div className="misc-container">
                 <button className="update-profile-button"><Link to="/update-profile">Update Profile</Link></button>
                 <button onClick={handleLogout} type="submit">Logout</button>
               </div>
@@ -99,7 +116,6 @@ export default function Dashboard() {
             </div>
             <div className="deck-content">
                 <h1 className="deck-title">{course.courseName}</h1>
-                <h2 className="deck-desc">A deck with {course.totalWords} words.</h2>
                 <h2 className="deck-author">Created by {course.courseAuthor}</h2>
                 <h2 className="deck-created-date">Date Created - {course.courseCreated}</h2>
             </div>
@@ -108,15 +124,6 @@ export default function Dashboard() {
             </div>
           </div>
           ))}
-
-          {/* <div className="profile-component widget-container">
-            <h2>Profile Options</h2>
-            {error && <h1>An error logging out</h1>}
-            <Link to="/update-profile">Update Profile</Link>
-            <div>
-              <button onClick={handleLogout} type="submit">Logout</button>
-            </div>
-          </div> */}
       </div>
     </div>
   )
