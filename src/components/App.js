@@ -12,6 +12,7 @@ import Flashcards from './Flashcards'
 import Courses from './Courses'
 import Welcome from './Welcome'
 import ContactUs from './ContactUs'
+import NotFound from './NotFound'
 import '../styles/login-form.scss';
 import '../styles/header.scss';
 import '../styles/widget.scss';
@@ -21,7 +22,7 @@ function App() {
     <Router>
       <AuthProvider>
         <Switch>
-          <PrivateRoute exact path='/' component={Dashboard} />
+          <PrivateRoute exact path='/home' component={Dashboard} />
           <PrivateRoute exact path='/update-profile' component={UpdateProfile} />
           <PrivateRoute exact path='/create' component={Create} />
           <PrivateRoute exact path='/flashcards' component={Flashcards} />
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/contact-us" component={ContactUs} />
+          <Route component={NotFound} />
         </Switch>
       </AuthProvider>
     </Router>

@@ -3,8 +3,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import firebase from "../firebase"
 
-import { useLayoutEffect, useRef } from 'react/cjs/react.production.min'
-
 export default function Dashboard() {
   const [error, setError] = useState("")
   const { currentUser, logout } = useAuth()
@@ -28,7 +26,6 @@ export default function Dashboard() {
       setLoading(false);
       items.map((user) => {
         if (user.userAdmin == false) {
-          console.log("Admin")
           document.querySelector('.admin-panel').classList.add('hide')
         }
       })
@@ -36,8 +33,6 @@ export default function Dashboard() {
   }
 
   function getCourse() {
-    
-    
     try {
       setLoading(true);
       userData.map((course) => {
@@ -93,7 +88,7 @@ export default function Dashboard() {
     <div>
       <div className="header-container">
         <div className="header-bar">
-          <Link to="/" className="header-element"><h1>Repetise</h1></Link>
+          <Link to="/home" className="header-element"><h1>Repetise</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
           <Link to="/create" className="admin-panel"><h1>Admin</h1></Link>
         </div>

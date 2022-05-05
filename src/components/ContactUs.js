@@ -15,7 +15,7 @@ export default function ContactUs() {
                   <input disabled className="input-form contact-form" type="text" value="laurenzguevara@outlook.com" name="email"></input>
                 </div>
                 <div className="form-secondary">
-                  <Link to="/" className="button contact-button ">Return</Link>
+                  <Link to="/home" className="button contact-button ">Return</Link>
                 </div>
               </div>
           </div>

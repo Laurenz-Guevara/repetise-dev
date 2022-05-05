@@ -8,6 +8,7 @@ export default function Signup() {
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
   const { signup } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -15,19 +16,39 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+    // if (passwordRef.current.value.includes('@')) {
+    //   console.log("EROOOOR")
+    //   return setError("This isn't a valid email")
+    // }
+
+    //|| !emailRef.current.value[0].includes('@'))
+
+    if (passwordRef.current.value !== passwordConfirmRef.current.value && (!emailRef.current.value.includes('@') || emailRef.current.value[0] === ('@'))) {
+      console.log(emailRef.current.value[0])
+      return setError("The passwords do not match and the email is not valid.")
     }
 
+    if (emailRef.current.value[0] === ('@') || !emailRef.current.value.includes('@')) {
+      console.log(passwordRef.current.value.length)
+      return setError("Please input a valid email.")
+    }
+  
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("The passwords do not match.")
+    }
+
+    if (passwordRef.current.value.length <= 6) {
+      return setError("Please enter a password with more than 6 characters")
+    }
+    
     try {
       setError("")
       setLoading(true)
       await signup(emailRef.current.value, userRef.current.value, passwordRef.current.value)
-      history.push("/")
+      setError("Please now Login")
     } catch {
       setError("Failed to create an account")
     }
-
     setLoading(false)
   }
 
@@ -37,7 +58,7 @@ export default function Signup() {
         <div className="form block">
         <form onSubmit={handleSubmit}>
           <h2 className="form-title">Sign Up</h2>
-          {error && <h1>An error creating account</h1>}
+          {error && <h1>{error}</h1>}
 
           <div className="form-wrapper">
               <div className="form-container">
