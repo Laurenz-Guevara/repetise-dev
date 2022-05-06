@@ -1,10 +1,15 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, history } from 'react-router-dom'
 import firebase from "../firebase"
+import { Route } from 'react-router-dom'
+import '../styles/widget.scss';
+
 
 export default function Dashboard() {
   const { currentUser, logout } = useAuth()
+  const [loading, setLoading] = useState(false);
+  const history = useHistory()
   let courseName = useRef()
   let pronunciation = useRef()
   let word = useRef()
@@ -12,6 +17,25 @@ export default function Dashboard() {
   let authorName = useRef()
   let imageUrl = useRef()
   let courseNameCard = useRef()
+
+  function getData() {
+    setLoading(true);
+    firebase.firestore().collection("userData").doc(currentUser.uid).onSnapshot((doc) => {
+      const items = [];
+      items.push(doc.data());
+      
+      items.map((user) => {
+        if (user.userAdmin === false) {
+          console.log(user.userAdmin)
+          history.push('/')
+          setLoading(false)
+        }
+        else {
+          setLoading(false)
+        }
+      })
+    })
+  }
 
   function createDeck(e) {
     let date = new Date();
@@ -45,19 +69,27 @@ export default function Dashboard() {
     });
   }
 
+  useEffect(() => {
+    getData();
+  }, [])
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <div>
       <div className="header-container">
         <div className="header-bar">
-          <Link to="/" className="header-element"><h1>Repetise</h1></Link>
-          <Link to="/" className="header-element"><h1>Home</h1></Link>
+          <Link to="/home" className="header-element"><h1>Repetise</h1></Link>
+          <Link to="/home" className="header-element"><h1>Home</h1></Link>
         </div>
       </div>
       <div className="wrapper">
       <div className="deck-block-intro widget-container">
         <div className = "intro-panel">
           <h1 className="user-name">Admin Panel</h1>
-          <p>Create a deck here.</p>
+          <p>Create a deck here. In case of any mistakes while creating a course and adding cards please access Cloud Firestore and edit any database entries.</p>
         </div>
       </div>
       <div className="deck-content-block widget-container ">

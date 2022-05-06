@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { auth } from '../firebase'
 import firebase from "../firebase"
 
@@ -9,11 +10,12 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-
+  const history = useHistory()
   const [currentUser, setCurrentUser] = useState()
   const [loading, setLoading] = useState(true)
 
   function signup(email, username, password) {
+
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
       return firebase.firestore().collection("userData").doc(cred.user.uid).set({
         enrolledCourses: [],
@@ -21,7 +23,13 @@ export function AuthProvider({ children }) {
         userEmail: email,
         userAdmin: false
       });
-    });
+    }).catch((error) => {
+      if (error.code == "auth/email-already-in-use") {
+        alert("This email already exists, try logging in?")
+      } else {
+        console.log("CAKE")
+      }
+    })
   }
 
   function login(email, password) {

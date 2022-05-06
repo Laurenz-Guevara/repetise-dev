@@ -1,0 +1,13 @@
+[debug] [2022-04-25T01:57:20.318Z] ----------------------------------------------------------------------
+[debug] [2022-04-25T01:57:20.319Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-04-25T01:57:20.319Z] CLI Version:   10.0.1
+[debug] [2022-04-25T01:57:20.319Z] Platform:      win32
+[debug] [2022-04-25T01:57:20.319Z] Node Version:  v14.18.0
+[debug] [2022-04-25T01:57:20.320Z] Time:          Mon Apr 25 2022 02:57:20 GMT+0100 (British Summer Time)
+[debug] [2022-04-25T01:57:20.320Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-25T01:57:20.358Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-25T01:57:20.358Z] > authorizing via signed-in user (laurenzguevara@outlook.com)
+[debug] [2022-04-25T01:57:20.358Z] [iam] checking project repetise for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-04-25T01:57:20.360Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/repetise:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}

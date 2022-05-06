@@ -164,6 +164,24 @@
   font-size: 30px !important;
 }
 
+.create-wrapper {
+  padding-top: 10px;
+  font-weight: normal;
+  .input-form {
+    width: 100%;
+    padding: 5px 0;
+    margin: 5px 0;
+  }
+
+  label {
+    padding: 5px 0;
+  }
+
+  .course-name b{
+    font-weight: normal;
+  }
+}
+
 @media (max-width: $small-screen) {
   .header-bar {
     padding: 0 20px;
@@ -211,9 +229,5 @@
 
   .misc-container {
     width: 100%;
-  }
-
-  .create-wrapper label{
-    margin: 5px;
   }
 }

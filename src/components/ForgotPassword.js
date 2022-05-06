@@ -17,9 +17,10 @@ export default function ForgotPassword() {
       setError("")
       setLoading(true)
       await resetPassword(emailRef.current.value)
-      setMessage("Check your inbox for further instructions")
+      console.log(emailRef.current.value)
+      setError("Check your inbox for further instructions")
     } catch {
-      setError("Failed to reset password")
+      setError("Failed to reset password, email may not exist")
     }
 
     setLoading(false)
@@ -31,7 +32,7 @@ export default function ForgotPassword() {
         <div className="form block">
           <form onSubmit={handleSubmit} >
             <h2 className="form-title">Reset Password</h2>
-            {error && <h1>An error resetting password</h1>}
+            {error && <h1>{error}</h1>}
             <div className="form-wrapper">
               <div className="form-container">
                 <label htmlFor="email"><b>Email:</b></label>

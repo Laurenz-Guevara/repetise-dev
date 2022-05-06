@@ -260,8 +260,8 @@ export default function Dashboard() {
     <div>
       <div className="header-container">
         <div className="header-bar">
-          <Link to="/" className="header-element"><h1>Repetise</h1></Link>
-          <Link to="/" className="header-element"><h1>Home</h1></Link>
+          <Link to="/home" className="header-element"><h1>Repetise</h1></Link>
+          <Link to="/home" className="header-element"><h1>Home</h1></Link>
           <Link to="/courses" className="header-element"><h1>Courses</h1></Link>
         </div>
       </div>
@@ -285,10 +285,10 @@ export default function Dashboard() {
                         <h1 className='target-word'>Loading...</h1>
                     </div>
                     <div className="answers-wrapper">
-                        <button onClick={() => buttonSelected('answer')} className="quiz-button" title="Show Answer">Show Answer</button>
+                        <button onClick={() => buttonSelected('answer')} className="quiz-button" title="Show Answer">Reveal</button>
                     </div>
                     <div className="secondary-buttons-wrapper">
-                      <Link to="/"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
+                      <Link to="/home"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
                     </div>
                 </div>
 
@@ -313,7 +313,7 @@ export default function Dashboard() {
                         <button onClick={() => buttonSelected('btn-4')}className="quiz-button" title="Answer four">Skip</button>
                     </div>
                     <div className="secondary-buttons-wrapper">
-                      <Link to="/"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
+                      <Link to="/home"><button className="quiz-button secondary-button quit-button">Quit</button></Link>
                     </div>
                 </div>
                 <div className="quiz-panel-behind hide">
@@ -321,7 +321,7 @@ export default function Dashboard() {
                         <h1>You have finished!</h1>
                         <p>You have completed the deck {courseName} Click here to return to your dashboard.</p>
                     </div>
-                    <button className="white-button"><Link to="/">Dashboard</Link></button>
+                    <button className="white-button"><Link to="/home">Dashboard</Link></button>
                 </div>
             </div>
         </main>

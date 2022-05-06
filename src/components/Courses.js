@@ -84,8 +84,8 @@ export default function Dashboard() {
     <div>
       <div className="header-container">
         <div className="header-bar">
-          <Link to="/" className="header-element"><h1>Repetise</h1></Link>
-          <Link to="/" className="header-element"><h1>Home</h1></Link>
+          <Link to="/home" className="header-element"><h1>Repetise</h1></Link>
+          <Link to="/home" className="header-element"><h1>Home</h1></Link>
         </div>
       </div>
       <div className="wrapper">

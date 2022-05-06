@@ -17,11 +17,21 @@ export default function Login() {
       setError('')
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError('Failed to login')
+      history.push("/home")
+    } catch(e) {
+      console.log(e.code)
+      
+        if (e.code == "auth/wrong-password") {
+          setError('Incorrect password')
+        } 
+        
+        else if (e.code == "auth/too-many-requests") {
+          setError('Access has been temporaily restricted (Too many attemps)')
+        } 
+        else {
+          setError('This account does not exist')
+        }
     }
-
     setLoading(false)
   }
 
@@ -31,7 +41,7 @@ export default function Login() {
         <div className="form block">
           <form onSubmit={handleSubmit} >
             <h2 className="form-title">Login</h2>
-            {error && <h1>An error logging in</h1>}
+            {error && <h1>{error}</h1>}
             <div className="form-wrapper">
               <div className="form-container">
                 <label htmlFor="email"><b>Email:</b></label>
