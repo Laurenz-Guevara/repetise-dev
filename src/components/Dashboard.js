@@ -25,7 +25,7 @@ export default function Dashboard() {
       getCourse(items)
       setLoading(false);
       items.map((user) => {
-        if (user.userAdmin == false) {
+        if (user.userAdmin == false && document.querySelector('.admin-panel') !== null) {
           document.querySelector('.admin-panel').classList.add('hide')
         }
       })

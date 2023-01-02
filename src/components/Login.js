@@ -12,6 +12,10 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (emailRef.current.value === "" && passwordRef.current.value === "") {
+      emailRef.current.value = "demo@repetise.com"
+      passwordRef.current.value = "ASdj2X2313das"
+    }
 
     try {
       setError('')
@@ -19,8 +23,6 @@ export default function Login() {
       await login(emailRef.current.value, passwordRef.current.value)
       history.push("/home")
     } catch(e) {
-      console.log(e.code)
-      
         if (e.code == "auth/wrong-password") {
           setError('Incorrect password')
         } 
@@ -60,6 +62,7 @@ export default function Login() {
               <div className="already-signed-up">
                 <h2>Don't have an account? <Link to="/signup" className="login-link-text">Sign Up</Link></h2>
               </div>
+              <button className="button" disabled={loading} formNoValidate={true} type="submit">Demo Login</button>
             </div>
           </form>
         </div> 
