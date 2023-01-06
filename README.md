@@ -1,5 +1,5 @@
 <div align="center">
-  <h2 align="center">Laurenz Guevara - P2418364</h2>
+  <h2 align="center">Laurenz Guevara</h2>
   <p align="center">Repetise - The Language Flashcard App</p>
 </div>
 
@@ -29,3 +29,6 @@ Ensure to "npm run build" before "firebase deploy"
 
 ### Link
 https://repetise.com/
+
+### .Env
+These files should not be pushed but is here as a reference for future projects.
