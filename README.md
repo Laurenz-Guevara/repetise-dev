@@ -29,6 +29,3 @@ Ensure to "npm run build" before "firebase deploy"
 
 ### Link
 https://repetise.com/
-
-### .Env
-These files should not be pushed but is here as a reference for future projects.
