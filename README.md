@@ -1,31 +1,92 @@
+<div id="top"></div>
 <div align="center">
-  <h2 align="center">Laurenz Guevara</h2>
-  <p align="center">Repetise - The Language Flashcard App</p>
+<h3 align="center">Repetise</h3>
+
+  <p align="center">
+    Repetise is an online spaced repetition language learning application which is built with React, SCSS, and Firebase.
+    <br />
+    <br />
+    <a href="https://ventus-verba.web.app/">View Live Site</a>
+    ·
+    <a href="https://github.com/Laurenz-Guevara/ventus-verba/issues">Report Bug</a>
+  </p>
 </div>
 
-<contents>
-  <contenttitle>Table of Contents</contenttitle>
-  <ol>
-    <li><a href="#summary">Summary</a></li>
-    <li><a href="#node-version">Node Version</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</contents>
+<!-- ABOUT THE PROJECT -->
+ <a href="https://repetise.com">
+  <img src="https://user-images.githubusercontent.com/58118627/221994039-8e7c4892-8ab9-4b60-8e44-e960f1d74721.png" width="100%"/>
+  </a>
 
-### Summary
-Repetise is an online language learning application which is built with React, SaSS, Firebase and Webpack. This is the repo that houses the code shown on production at www.repetise.com. This is not a webapp for real use but for the Development Project Module and is built my P2418364, Laurenz Guevara.
+## Additional Images
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/58118627/221994122-6af52bdd-8e66-49c6-b549-586d328e835c.png" width="32%" /> 
+  <img src="https://user-images.githubusercontent.com/58118627/221994137-c365190a-469e-4a4f-98f7-e6d5cff38cbe.png" width="32%" />
+  <img src="https://user-images.githubusercontent.com/58118627/221994148-5ac68231-7144-40c3-9134-c982695d0635.png" width="32%" />
+</p>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Built Using
+
+* [Vite](https://vitejs.dev/)
+* [Sass](https://sass-lang.com/)
+* [Firebase](https://firebase.google.com/)
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+If you would like to build this app locally for yourself just follow the instructions below.
 
 ### Node Version
-Node 14.18.0
 
-### Notes
-Incase firebase needs to be re-added then during initalise do not Firebase init as a single html, select multiple.
-Firebase is setup with this project the firebase project name is "repetise"
-Ensure to "npm run build" before "firebase deploy"
+v14.18.0
 
-### Contact
+### Installation
 
-* laurenzguevara@outlook.com
+1. Clone the repo
 
-### Link
-https://repetise.com/
+    ```bash
+    git clone https://github.com/Laurenz-Guevara/repetise-dev
+    ```
+
+2. Install Packages
+
+    ```bash
+    npm install
+    ```
+    
+3. Run a Build
+
+    ```bash
+    npm run build
+    ```
+
+4. Start the App
+
+    ```bash
+    npm run dev
+    ```
+
+### Deploy Repetise
+
+1. Run a Build
+
+    ```bash
+    npm run build
+    ```
+
+2. Deploy on firebase
+
+    ```bash
+    firebase deploy
+    ```
+
+<!-- CONTACT -->
+## Contact
+
+Laurenz Guevara - laurenzguevara@outlook.com
+LinkedIn - https://www.linkedin.com/in/laurenzguevara/
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
