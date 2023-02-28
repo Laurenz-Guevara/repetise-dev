@@ -6,9 +6,9 @@
     Repetise is an online spaced repetition language learning application which is built with React, SCSS, and Firebase.
     <br />
     <br />
-    <a href="https://ventus-verba.web.app/">View Live Site</a>
+    <a href="https://repetise.com">View Live Site</a>
     ·
-    <a href="https://github.com/Laurenz-Guevara/ventus-verba/issues">Report Bug</a>
+    <a href="https://github.com/Laurenz-Guevara/repetise-dev/issues">Report Bug</a>
   </p>
 </div>
 
